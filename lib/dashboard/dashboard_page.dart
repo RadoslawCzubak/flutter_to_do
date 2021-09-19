@@ -128,10 +128,114 @@ class MainItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: Container(
+        padding: EdgeInsets.all(16.0),
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+                child: Text(
+              'Lorem ipsum dolor sit amet',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+            )),
+            DateRow(),
+            TaskDescription(),
+            LabelsRow(),
+            PeoplesRow()
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class TaskDescription extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Text(
+      'Phasellus consectetur fringilla dolor nec viverra. Mauris viverra urna eu libero tempus rhoncus.',
+    ));
+  }
+}
+
+class LabelsRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 45.0,
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(4.0),
+        children: [
+          Label(),
+          Label(),
+        ],
+      ),
+    );
+  }
+}
+
+class PeoplesRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Stack(
+            children: [
+              Positioned(
+                child: ClipOval(child: imagePlaceholder()),
+              ),
+              Positioned(child: ClipOval(child: imagePlaceholder()), left: 20),
+              Positioned(child: ClipOval(child: imagePlaceholder()), left: 40),
+              Positioned(child: ClipOval(child: imagePlaceholder()), left: 60),
+            ],
+          ),
+        ),
+        Expanded(child: Text('+ 4'))
+      ],
+    );
+  }
+}
+
+Widget imagePlaceholder() {
+  return Image.asset(
+    'assets/images/Profile_avatar_placeholder_large.png',
+    height: 50.0,
+    width: 50.0,
+  );
+}
+
+class Label extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+      child: Container(
+        alignment: Alignment.center,
+        height: 30.0,
+        width: 70.0,
+        child: Text(
+          'High',
+          style: TextStyle(color: Colors.white, fontSize: 14.0),
+        ),
+        decoration: BoxDecoration(
+            color: Colors.orange,
+            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+      ),
+    );
+  }
+}
+
+class DateRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [Text('Oct 25, 2021')],
     );
   }
 }
