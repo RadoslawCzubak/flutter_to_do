@@ -139,22 +139,21 @@ class MainItem extends StatelessWidget {
 class ToDoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Color> colorList = [lightRed, lightGreen, lightOrange, lightBlue];
+
     return Container(
       height: 200.0,
-      child: Expanded(
-        child: ListView.separated(
-          padding: EdgeInsets.all(16.0),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return ToDoItem(lightBlue);
-          },
-          separatorBuilder: (context, index) {
+      child: ListView.builder(
+        shrinkWrap: true,
+        padding: EdgeInsets.all(16.0),
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          if (index % 2 == 1)
             return SizedBox(
-              width: 5.0,
+              width: 10.0,
             );
-          },
-          itemCount: 6,
-        ),
+          return ToDoItem(colorList[(index / 2 % 4).toInt()]);
+        },
       ),
     );
   }
@@ -166,6 +165,7 @@ class ToDoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 180.0,
       child: Container(
         decoration: BoxDecoration(
             color: color,
