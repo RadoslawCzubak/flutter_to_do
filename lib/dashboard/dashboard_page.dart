@@ -14,11 +14,12 @@ class DashboardPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-            DashboardUserProfile(),
-            MainTitle(),
-            MainTasksList(),
+            const DashboardUserProfile(),
+            const MainTitle(),
+            const MainTasksList(),
             Container(
-              padding: EdgeInsets.only(top: 16.0, left: 16.0, bottom: 10.0),
+              padding:
+                  const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 10.0),
               child: RichText(
                   text: const TextSpan(children: [
                 TextSpan(
@@ -32,7 +33,7 @@ class DashboardPage extends StatelessWidget {
                     style: TextStyle(fontSize: 24.0, color: Colors.black)),
               ])),
             ),
-            ToDoList()
+            const ToDoList()
           ])),
     );
   }
@@ -99,7 +100,7 @@ class MainTasksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300.0,
       child: ListView(
         itemExtent: 300.0,
@@ -126,18 +127,18 @@ class MainItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            borderRadius: const BorderRadius.all(Radius.circular(20.0))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-                child: Text(
+                child: const Text(
               'Lorem ipsum dolor sit amet',
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
             )),
@@ -165,12 +166,12 @@ class TaskDescription extends StatelessWidget {
 class LabelsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 45.0,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.all(4.0),
-        children: [
+        padding: const EdgeInsets.all(4.0),
+        children: const [
           Label(),
           Label(),
         ],
@@ -180,23 +181,32 @@ class LabelsRow extends StatelessWidget {
 }
 
 class PeoplesRow extends StatelessWidget {
+  const PeoplesRow({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Stack(
-            children: [
-              Positioned(
+        Stack(
+          children: [
+            Positioned(
+              child: ClipOval(child: imagePlaceholder()),
+            ),
+            Padding(
                 child: ClipOval(child: imagePlaceholder()),
-              ),
-              Positioned(child: ClipOval(child: imagePlaceholder()), left: 20),
-              Positioned(child: ClipOval(child: imagePlaceholder()), left: 40),
-              Positioned(child: ClipOval(child: imagePlaceholder()), left: 60),
-            ],
-          ),
+                padding: const EdgeInsets.only(left: 20)),
+            Padding(
+                child: ClipOval(child: imagePlaceholder()),
+                padding: const EdgeInsets.only(left: 40)),
+            Padding(
+                child: ClipOval(child: imagePlaceholder()),
+                padding: const EdgeInsets.only(left: 60)),
+          ],
         ),
-        Expanded(child: Text('+ 4'))
+        const Padding(
+          child: Text('+ 4'),
+          padding: EdgeInsets.only(left: 20),
+        )
       ],
     );
   }
@@ -211,6 +221,8 @@ Widget imagePlaceholder() {
 }
 
 class Label extends StatelessWidget {
+  const Label({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -219,11 +231,11 @@ class Label extends StatelessWidget {
         alignment: Alignment.center,
         height: 30.0,
         width: 70.0,
-        child: Text(
+        child: const Text(
           'High',
           style: TextStyle(color: Colors.white, fontSize: 14.0),
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.orange,
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
       ),
@@ -232,15 +244,19 @@ class Label extends StatelessWidget {
 }
 
 class DateRow extends StatelessWidget {
+  const DateRow({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [Text('Oct 25, 2021')],
+      children: const [Text('Oct 25, 2021')],
     );
   }
 }
 
 class ToDoList extends StatelessWidget {
+  const ToDoList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     List<Color> colorList = [lightRed, lightGreen, lightOrange, lightBlue];
@@ -249,7 +265,7 @@ class ToDoList extends StatelessWidget {
       height: 200.0,
       child: ListView.builder(
         shrinkWrap: true,
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (index % 2 == 1)
@@ -268,12 +284,12 @@ class ToDoItem extends StatelessWidget {
   ToDoItem(this.color, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 180.0,
       child: Container(
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            borderRadius: const BorderRadius.all(Radius.circular(20.0))),
       ),
     );
   }
