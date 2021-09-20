@@ -36,7 +36,46 @@ class DashboardPage extends StatelessWidget {
             ),
             const ToDoList()
           ])),
+      bottomNavigationBar: _buildBottomNav(),
     );
+  }
+
+  Widget _buildBottomNav() {
+    return BottomNavigationBar(items: [
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home,
+            color: Colors.orange,
+          ),
+          label: ''),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.search,
+            color: Colors.orange,
+          ),
+          label: ''),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.check_box,
+            color: Colors.orange,
+          ),
+          label: ''),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.notifications,
+            color: Colors.orange,
+          ),
+          label: ''),
+      BottomNavigationBarItem(
+          icon: ClipOval(
+            child: Image.asset(
+              'assets/images/Profile_avatar_placeholder_large.png',
+              width: 24.0,
+              height: 24.0,
+            ),
+          ),
+          label: '')
+    ]);
   }
 }
 
