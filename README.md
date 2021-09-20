@@ -4,4 +4,4 @@ To Do App made with Flutter - my first attempt to use Flutter to create cross-pl
 
 ## Preview
 
-!(Preview.png)
+<img src="https://raw.githubusercontent.com/RadoslawCzubak/flutter_to_do/master/Preview.png" width="50%"/>
