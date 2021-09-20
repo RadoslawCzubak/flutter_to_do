@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/styles/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key, required this.title}) : super(key: key);
@@ -170,7 +171,7 @@ class LabelsRow extends StatelessWidget {
       height: 45.0,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.only(top: 4.0, right: 4.0, bottom: 4.0),
         children: const [
           Label(),
           Label(),
@@ -185,29 +186,32 @@ class PeoplesRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Stack(
-          children: [
-            Positioned(
-              child: ClipOval(child: imagePlaceholder()),
-            ),
-            Padding(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        children: [
+          Stack(
+            children: [
+              Positioned(
                 child: ClipOval(child: imagePlaceholder()),
-                padding: const EdgeInsets.only(left: 20)),
-            Padding(
-                child: ClipOval(child: imagePlaceholder()),
-                padding: const EdgeInsets.only(left: 40)),
-            Padding(
-                child: ClipOval(child: imagePlaceholder()),
-                padding: const EdgeInsets.only(left: 60)),
-          ],
-        ),
-        const Padding(
-          child: Text('+ 4'),
-          padding: EdgeInsets.only(left: 20),
-        )
-      ],
+              ),
+              Padding(
+                  child: ClipOval(child: imagePlaceholder()),
+                  padding: const EdgeInsets.only(left: 20)),
+              Padding(
+                  child: ClipOval(child: imagePlaceholder()),
+                  padding: const EdgeInsets.only(left: 40)),
+              Padding(
+                  child: ClipOval(child: imagePlaceholder()),
+                  padding: const EdgeInsets.only(left: 60)),
+            ],
+          ),
+          const Padding(
+            child: Text('+ 4'),
+            padding: EdgeInsets.only(left: 20),
+          )
+        ],
+      ),
     );
   }
 }
@@ -226,7 +230,7 @@ class Label extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 4.0, right: 4.0),
+      padding: const EdgeInsets.only(right: 8.0),
       child: Container(
         alignment: Alignment.center,
         height: 30.0,
@@ -248,8 +252,20 @@ class DateRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: const [Text('Oct 25, 2021')],
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            'assets/images/flag.svg',
+            width: 20.0,
+          ),
+          const SizedBox(
+            width: 5.0,
+          ),
+          const Text('Oct 25, 2021')
+        ],
+      ),
     );
   }
 }
