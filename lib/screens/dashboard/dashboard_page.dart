@@ -28,45 +28,41 @@ class DashboardPage extends StatelessWidget {
   }
 
   Widget _buildBottomNav() {
-    return Container(
-      margin: EdgeInsets.all(16.0),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-      child: BottomNavigationBar(items: [
-        const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: Colors.orange,
+    return BottomNavigationBar(items: [
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.home,
+            color: Colors.orange,
+          ),
+          label: ''),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.search,
+            color: Colors.orange,
+          ),
+          label: ''),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.check_box,
+            color: Colors.orange,
+          ),
+          label: ''),
+      const BottomNavigationBarItem(
+          icon: Icon(
+            Icons.notifications,
+            color: Colors.orange,
+          ),
+          label: ''),
+      BottomNavigationBarItem(
+          icon: ClipOval(
+            child: Image.asset(
+              'assets/images/Profile_avatar_placeholder_large.png',
+              width: 24.0,
+              height: 24.0,
             ),
-            label: ''),
-        const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-              color: Colors.orange,
-            ),
-            label: ''),
-        const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.check_box,
-              color: Colors.orange,
-            ),
-            label: ''),
-        const BottomNavigationBarItem(
-            icon: Icon(
-              Icons.notifications,
-              color: Colors.orange,
-            ),
-            label: ''),
-        BottomNavigationBarItem(
-            icon: ClipOval(
-              child: Image.asset(
-                'assets/images/Profile_avatar_placeholder_large.png',
-                width: 24.0,
-                height: 24.0,
-              ),
-            ),
-            label: '')
-      ]),
-    );
+          ),
+          label: '')
+    ]);
   }
 }
 
