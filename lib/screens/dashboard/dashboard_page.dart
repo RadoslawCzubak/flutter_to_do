@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/dashboard/dashboard_in_progress.dart';
-import 'package:flutter_todo_app/dashboard/dashboard_main_list.dart';
-import 'package:flutter_todo_app/dashboard/dashboard_todo_list.dart';
+import 'package:flutter_todo_app/screens/dashboard/dashboard_in_progress.dart';
+import 'package:flutter_todo_app/screens/dashboard/dashboard_main_list.dart';
+import 'package:flutter_todo_app/screens/dashboard/dashboard_todo_list.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key, required this.title}) : super(key: key);
