@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/styles/colors.dart';
-import 'package:flutter_todo_app/dashboard/dashboard_daterow.dart';
+import 'package:flutter_todo_app/screens/dashboard/dashboard_daterow.dart';
 
 class InProgressComponent extends StatelessWidget {
   @override
