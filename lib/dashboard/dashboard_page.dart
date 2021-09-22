@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/styles/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key, required this.title}) : super(key: key);
@@ -20,7 +21,9 @@ class DashboardPage extends StatelessWidget {
               const MainTitle(),
               const MainTasksList(),
               ToDoTitle(),
-              const ToDoList()
+              const ToDoList(),
+              InProgressTitle(),
+              InProgressTasks()
             ]),
       )),
       bottomNavigationBar: _buildBottomNav(),
@@ -368,7 +371,7 @@ class ToDoItem extends StatelessWidget {
             color: color,
             borderRadius: const BorderRadius.all(Radius.circular(20.0))),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -392,5 +395,57 @@ class ToDoItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class InProgressTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 10.0),
+      child: RichText(
+          text: const TextSpan(children: [
+        TextSpan(
+            text: "In ",
+            style: TextStyle(
+              fontSize: 24.0,
+              color: Colors.black,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+            )),
+        TextSpan(
+            text: "Progress",
+            style: TextStyle(
+                fontFamily: 'Poppins', fontSize: 24.0, color: Colors.black)),
+      ])),
+    );
+  }
+}
+
+class InProgressTasks extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+        elevation: 2.0,
+        margin: EdgeInsets.all(16.0),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        child: Container(
+          child: Row(
+            children: [
+              Expanded(
+                  child: Column(
+                children: [
+                  Text("Create new card",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22.0)),
+                  DateRow()
+                ],
+              )),
+            ],
+          ),
+        ));
   }
 }
