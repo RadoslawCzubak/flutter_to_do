@@ -11,31 +11,18 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-            const DashboardUserProfile(),
-            const MainTitle(),
-            const MainTasksList(),
-            Container(
-              padding:
-                  const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 10.0),
-              child: RichText(
-                  text: const TextSpan(children: [
-                TextSpan(
-                    text: "To ",
-                    style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black)),
-                TextSpan(
-                    text: "Do",
-                    style: TextStyle(fontSize: 24.0, color: Colors.black)),
-              ])),
-            ),
-            const ToDoList()
-          ])),
+          child: SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const DashboardUserProfile(),
+              const MainTitle(),
+              const MainTasksList(),
+              ToDoTitle(),
+              const ToDoList()
+            ]),
+      )),
       bottomNavigationBar: _buildBottomNav(),
     );
   }
@@ -91,20 +78,21 @@ class DashboardUserProfile extends StatelessWidget {
           ClipOval(
             child: Image.asset(
               'assets/images/Profile_avatar_placeholder_large.png',
-              height: 50.0,
-              width: 50.0,
+              height: 35.0,
+              width: 35.0,
             ),
           ),
           const SizedBox(
-            width: 6.0,
+            width: 10.0,
           ),
-          const Text(
-            'Hello, ',
-            style: TextStyle(fontSize: 20.0),
-          ),
+          const Text('Hello, ',
+              style: TextStyle(fontSize: 18.0, fontFamily: 'Poppins')),
           const Text(
             'Amanda',
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins'),
           )
         ],
       ),
@@ -126,10 +114,12 @@ class MainTitle extends StatelessWidget {
             style: TextStyle(
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins',
                 color: Colors.black)),
         TextSpan(
             text: "tasks today",
-            style: TextStyle(fontSize: 24.0, color: Colors.black)),
+            style: TextStyle(
+                fontSize: 24.0, color: Colors.black, fontFamily: 'Poppins')),
       ])),
     );
   }
@@ -258,8 +248,8 @@ class PeoplesRow extends StatelessWidget {
 Widget imagePlaceholder() {
   return Image.asset(
     'assets/images/Profile_avatar_placeholder_large.png',
-    height: 50.0,
-    width: 50.0,
+    height: 35.0,
+    width: 35.0,
   );
 }
 
@@ -330,6 +320,29 @@ class ToDoList extends StatelessWidget {
           return ToDoItem(colorList[(index / 2 % 4).toInt()]);
         },
       ),
+    );
+  }
+}
+
+class ToDoTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 16.0, left: 16.0, bottom: 10.0),
+      child: RichText(
+          text: const TextSpan(children: [
+        TextSpan(
+            text: "To ",
+            style: TextStyle(
+                fontSize: 24.0, color: Colors.black, fontFamily: 'Poppins')),
+        TextSpan(
+            text: "Do",
+            style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black)),
+      ])),
     );
   }
 }
