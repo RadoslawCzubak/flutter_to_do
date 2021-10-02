@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_app/styles/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo_app/models/project.dart';
+import 'package:flutter_todo_app/screens/dashboard/cubit/dashboard_cubit.dart';
+
 import 'package:flutter_todo_app/screens/dashboard/dashboard_daterow.dart';
+import 'package:flutter_todo_app/styles/colors.dart';
 
 class MainComponent extends StatelessWidget {
+  List<Project> projects = [];
+
+  MainComponent({
+    Key? key,
+    required this.projects,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [MainTitle(), MainTasksList()],
+      children: [MainTitle(), MainTasksList(projects: projects)],
     );
   }
 }
@@ -39,7 +50,9 @@ class MainTitle extends StatelessWidget {
 }
 
 class MainTasksList extends StatelessWidget {
-  const MainTasksList({Key? key}) : super(key: key);
+  List<Project> projects = [];
+
+  MainTasksList({Key? key, required this.projects}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +61,13 @@ class MainTasksList extends StatelessWidget {
       child: ListView(
         itemExtent: 300.0,
         scrollDirection: Axis.horizontal,
-        children: [
-          MainItem(color: lightOrange),
-          MainItem(color: lightBlue),
-          MainItem(color: lightGreen),
-          MainItem(color: lightRed)
-        ],
+        children: projects.map((e) {
+          return MainItem(
+            title: e.title,
+            description: e.description,
+            color: lightBlue,
+          );
+        }).toList(),
       ),
     );
   }
@@ -61,9 +75,13 @@ class MainTasksList extends StatelessWidget {
 
 class MainItem extends StatelessWidget {
   Color color;
+  String title;
+  String description;
 
   MainItem({
     Key? key,
+    required this.title,
+    required this.description,
     required this.color,
   }) : super(key: key);
 
@@ -81,12 +99,12 @@ class MainItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-                child: const Text(
-              'Lorem ipsum dolor sit amet',
+                child: Text(
+              title,
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
             )),
             DateRow(),
-            TaskDescription(),
+            Expanded(child: TaskDescription(text: description)),
             LabelsRow(),
             PeoplesRow()
           ],
@@ -97,11 +115,15 @@ class MainItem extends StatelessWidget {
 }
 
 class TaskDescription extends StatelessWidget {
+  String text;
+
+  TaskDescription({Key? key, required this.text}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Text(
-      'Phasellus consectetur fringilla dolor nec viverra. Mauris viverra urna eu libero tempus rhoncus.',
+      text,
     ));
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo_app/screens/dashboard/cubit/dashboard_cubit.dart';
 import 'package:flutter_todo_app/screens/dashboard/dashboard_in_progress.dart';
 import 'package:flutter_todo_app/screens/dashboard/dashboard_main_list.dart';
 import 'package:flutter_todo_app/screens/dashboard/dashboard_todo_list.dart';
@@ -10,20 +12,28 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const DashboardUserProfile(),
-              MainComponent(),
-              ToDoComponent(),
-              InProgressComponent()
-            ]),
-      )),
-      bottomNavigationBar: _buildBottomNav(),
+    return BlocProvider<DashboardCubit>(
+      create: (context) => DashboardCubit(),
+      child: Scaffold(
+          body: SafeArea(
+              child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const DashboardUserProfile(),
+                  BlocBuilder<DashboardCubit, DashboardState>(
+                    builder: (context, state) {
+                      return MainComponent(
+                        projects: state.projects,
+                      );
+                    },
+                  ),
+                  ToDoComponent(),
+                  InProgressComponent()
+                ]),
+          )),
+          bottomNavigationBar: _buildBottomNav()),
     );
   }
 
@@ -93,7 +103,17 @@ class DashboardUserProfile extends StatelessWidget {
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Poppins'),
-          )
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/addtask');
+              },
+              child: Text('add task')),
+          ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<DashboardCubit>(context).getProjects();
+              },
+              child: Text('refresh')),
         ],
       ),
     );

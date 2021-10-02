@@ -12,49 +12,51 @@ class AddTaskPage extends StatelessWidget {
     return BlocProvider<AddTaskCubit>(
         create: (context) => AddTaskCubit(),
         child: Scaffold(
+            appBar: AppBar(),
             body: SafeArea(
                 child: BlocConsumer<AddTaskCubit, AddTaskState>(
                     listener: (context, state) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Text added.")));
-        }, builder: (context, state) {
-          return Container(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                RichText(
-                    text: TextSpan(
-                        style: TextStyle(color: Colors.black, fontSize: 24.0),
-                        children: [
-                      TextSpan(
-                          text: 'Add ',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextSpan(text: 'task')
-                    ])),
-                TextField(
-                  decoration: InputDecoration(hintText: "Title"),
-                  controller: titleController,
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text("Text added.")));
+            }, builder: (context, state) {
+              return Container(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    RichText(
+                        text: TextSpan(
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 24.0),
+                            children: [
+                          TextSpan(
+                              text: 'Add ',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: 'task')
+                        ])),
+                    TextField(
+                      decoration: InputDecoration(hintText: "Title"),
+                      controller: titleController,
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(hintText: 'Description'),
+                      controller: descriptionController,
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<AddTaskCubit>(context).addTask(
+                              titleController.text, descriptionController.text);
+                        },
+                        child: Text("Save"))
+                  ],
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                TextField(
-                  decoration: InputDecoration(hintText: 'Description'),
-                  controller: descriptionController,
-                ),
-                SizedBox(
-                  height: 50.0,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<AddTaskCubit>(context).addTask(
-                          titleController.text, descriptionController.text);
-                    },
-                    child: Text("Save"))
-              ],
-            ),
-          );
-        }))));
+              );
+            }))));
   }
 }
