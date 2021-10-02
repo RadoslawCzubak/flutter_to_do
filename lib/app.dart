@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_app/screens/add_task/add_task_page.dart';
+import 'package:flutter_todo_app/screens/route_generator.dart';
 import 'screens/dashboard/dashboard_page.dart';
 
 class ToDoApp extends StatelessWidget {
@@ -12,7 +13,8 @@ class ToDoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AddTaskPage(),
+      initialRoute: '',
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
